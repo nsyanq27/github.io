@@ -291,7 +291,7 @@ scope.addEventListener("click", (e) => {
 /* ==================== TAB TITLE CHANGER ==================== */
 let docTitle = document.title;
 window.addEventListener("blur", () => {
-    document.title = "Come back! 😭 | Neisya";
+    document.title = "Portofolio_Neisya";
 });
 window.addEventListener("focus", () => {
     document.title = docTitle;
@@ -528,4 +528,38 @@ function updateCertImage() {
     if(pageNum) {
         pageNum.innerText = `${certIndex + 1} / ${certImages.length}`;
     }
+
 }
+
+/* === FUNGSI PDF VIEWER POPUP === */
+function openPdfViewer(pdfUrl) {
+    // 1. Tutup modal pilihan CV dulu
+    document.getElementById('cvModal').style.display = "none";
+    
+    // 2. Ambil elemen modal PDF & Iframe
+    const pdfModal = document.getElementById('pdfViewerModal');
+    const pdfFrame = document.getElementById('pdfFrame');
+
+    // 3. Set URL PDF ke iframe
+    pdfFrame.src = pdfUrl;
+
+    // 4. Tampilkan Modal PDF
+    pdfModal.style.display = "block";
+}
+
+function closePdfViewer() {
+    const pdfModal = document.getElementById('pdfViewerModal');
+    const pdfFrame = document.getElementById('pdfFrame');
+
+    // Sembunyikan modal dan kosongkan src agar memori tidak berat
+    pdfModal.style.display = "none";
+    pdfFrame.src = ""; 
+}
+
+// Menutup modal PDF jika user klik area gelap di luar kotak
+window.addEventListener('click', function(event) {
+    const pdfModal = document.getElementById('pdfViewerModal');
+    if (event.target == pdfModal) {
+        closePdfViewer();
+    }
+});
